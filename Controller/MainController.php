@@ -2,6 +2,7 @@
 require_once 'Services/ToolBox.php';
 require_once 'Services/Render/Render.php';
 require_once ("Model/MainManager/MainManager.php");
+require_once ("Model/Utilisateur/Utilisateur.php");
 class MainController extends Render {
 
     private $mainManager;
@@ -10,6 +11,7 @@ class MainController extends Render {
     {
         parent::__construct(Render::class);
         $this->mainManager = new MainManager();
+        $this->utilisateur = new Utilisateur();
     }
     public function accueil(){
         $data_page =[
@@ -24,18 +26,23 @@ class MainController extends Render {
     }
 
     public function login(): void {
-        $datas = $this->mainManager->getDataX();
-        Toolbox::addAlert('Nicolas est là', Toolbox::COULEUR_ROUGE);
-      
         $data_page =[
             "page_description" => "Page de connection",
             "page_title" => "Se connecter",
-            "datas" => $datas,
             "page_css" => ["page1.css"],
             "view" => "View/login/login.view.php",
             "template" => "View/Layout/base.php"
         ];
         $this->render($data_page);
+    }
+
+    public function seConnecter()
+    {
+        $email = $_POST['mail'];
+        $password = $_POST['mdp'];
+
+        $isVerified = $this->utilisateur->seConnecter($email, $password);
+        return $isVerified;
     }
 
     public function register() {
@@ -76,6 +83,21 @@ class MainController extends Render {
             "template" => "View/Layout/base.php"
         ];
         $this->render($data_page);
+    }
+
+    public function registerUser()
+    {
+        $nomUtilisateur = $_POST['nom'];
+        $email = $_POST['mail'];
+        $password = $_POST['mdp'];
+
+        $isRegister = $this->utilisateur->inscrire($email, $password, $nomUtilisateur);
+
+        if($isRegister){
+            $this->login();
+        } else{
+            $this->register();
+        }
     }
 }
 ?>

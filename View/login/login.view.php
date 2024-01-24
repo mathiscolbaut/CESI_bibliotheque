@@ -6,13 +6,13 @@
 <br/>
 <body class="d-flex justify-content-center align-items-center text-center">
     <div id="login-one" class="login-one">
-        <form class="login-one-form">
+        <form class="login-one-form" action="validationLogin" method="POST">
             <div class="col-md-3 mx-auto">
                 <div class="login-one-ico"><i id="lockico" class="fa fa-unlock-alt"></i></div>
                 <div class="form-group mb-3">
-                    <input id="mail" class="form-control" type="text" placeholder="Adresse Mail" />
+                    <input id="mail" name="mail" class="form-control" type="text" placeholder="Adresse Mail" />
                     <br />
-                    <input id="mdp" class="form-control" type="password" placeholder="Mot de passe" />
+                    <input id="mdp" name="mdp" class="form-control" type="password" placeholder="Mot de passe" />
                     <br />
                     <div class="text-center"> <!-- Ajout de la classe text-center -->
                         <button id="submit" class="btn btn-primary" style="background-color: #007ac9;" type="submit">S'enregistrer</button>

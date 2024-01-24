@@ -5,7 +5,7 @@ require_once("./Controller/MainController.php");
 $mainController = new MainController();
 try {
     if (empty($_GET['page'])) {
-        $page = "accueil";
+        $page = "login";
     } else {
         $url = explode ("/", filter_var($_GET['page'], FILTER_SANITIZE_URL));
         $page = $url[0];
@@ -17,8 +17,20 @@ try {
         case "login" :
             $mainController->login();
             break;
+        case "validationLogin" :
+            $isLogin = $mainController->seConnecter();
+            if($isLogin){
+                header("Location: ".URL."accueil");
+                break;
+            } else{
+                header("Location: ".URL."login");
+                break;
+            }
         case "register" :
             $mainController->register();
+            break;
+        case 'registerUser':
+            $mainController->registerUser();
             break;
         case "page2" :
             $mainController->page2();

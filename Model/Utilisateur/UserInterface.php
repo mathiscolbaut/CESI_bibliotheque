@@ -18,7 +18,7 @@ interface UserInterface extends ArrayAccess
 
     public function setNomUtilisateur(string $nom_utilisateur): void;
 
-    public function seConnecter(string $email, string $password): void;
+    public function seConnecter(string $email, string $password): bool;
 
-    public function inscrire(string $email, string $password, string $nom_utilisateur): void;
+    public function inscrire(string $email, string $password, string $nom_utilisateur): bool;
 }

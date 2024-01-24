@@ -1,6 +1,9 @@
 <?php
 
-class Utilisateur implements UserInterface
+require_once 'UserInterface.php';
+require_once 'Services/Model.php';
+
+class Utilisateur extends Model implements UserInterface
 {
     private int $id;
 
@@ -67,13 +70,40 @@ class Utilisateur implements UserInterface
     public function offsetUnset($offset):void {
         unset($this->data[$offset]);
     }
-    public function seConnecter(string $email, string $password): void
+    public function seConnecter(string $email, string $password) :bool
     {
-        // TODO: Implement seConnecter() method.
+        $req = "SELECT * FROM Utilisateur WHERE mail = :email";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":email", $email, PDO::PARAM_STR);
+        $stmt->execute();
+
+        if ($stmt->rowCount() == 1) {
+            $utilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (password_verify($password, $utilisateur['mot_de_passe'])) {
+                $_SESSION['user'] = $utilisateur;
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+
+        return $user;
     }
 
-    public function inscrire(string $email, string $password, string $nom_utilisateur): void
+    public function inscrire(string $email, string $password, string $nom_utilisateur): bool
     {
-        // TODO: Implement inscrire() method.
+        $req = "INSERT INTO Utilisateur (mail, mot_de_passe, nom) VALUES (:email, :password, :nom_utilisateur)";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":email", $email, PDO::PARAM_STR);
+        $stmt->bindValue(":password", password_hash($password, PASSWORD_DEFAULT), PDO::PARAM_STR);
+        $stmt->bindValue(":nom_utilisateur", $nom_utilisateur, PDO::PARAM_STR);
+
+        if($stmt->execute()){
+            return true;
+        } else {
+            return false;
+        }
     }
 }

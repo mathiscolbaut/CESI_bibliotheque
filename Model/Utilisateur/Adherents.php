@@ -2,5 +2,4 @@
 
 class Adherents extends Utilisateur
 {
-
 }
