@@ -10,7 +10,7 @@ class Utilisateur implements UserInterface
 
     private string $nom_utilisateur;
 
-    private $data =[];
+    private array $data =[];
 
     public function getId(): int
     {
