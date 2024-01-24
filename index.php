@@ -14,8 +14,11 @@ try {
         case "accueil" :
             $mainController->accueil();
             break;
-        case "page1" :
-            $mainController->page1();
+        case "login" :
+            $mainController->login();
+            break;
+        case "register" :
+            $mainController->register();
             break;
         case "page2" :
             $mainController->page2();

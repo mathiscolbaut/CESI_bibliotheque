@@ -1,25 +1,31 @@
-<nav class="bg-gray-800">
-  <div class="container mx-auto px-6 py-3 lg: flex lg:justify-between lg:items-center">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
     <!-- Bouton de menu hamburger pour mobile -->
-    <button id="menuButton" class="text-white focus:outline-none lg:hidden" type="button">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <!-- Icône de menu hamburger -->
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-      </svg>
+      <span class="navbar-toggler-icon"></span>
     </button>
+
     <!-- Menu principal -->
-    <div class="hidden lg:flex lg:items-center lg: w-auto w-full" id="mobileMenu">
-      <ul class="lg: flex items-center justify-between text-base text-white pt-4 lg:pt-0">
-        <li><a class="lg:p-4 py-3 px-0 block border-b-2 border-transparent lg: border-none hover: border-indigo-400" href="<?= URL ?>accueil">Accueil</a></li>
-        <li><a class="lg:p-4 py-3 px-0 block border-b-2 border-transparent lg: border-none hover: border-indigo-400" href="<?= URL ?>page1">Page1</a></li>
-        <li class="relative">
-          <button id="dropdownButton" class="lg:p-4 py-3 px -0 block border-b-2 border-transparent lg: border-none hover: border-indigo-400">
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="<?= URL ?>accueil">Accueil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?= URL ?>login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?= URL ?>register">Register</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Liste déroulante
-          </button>
-          <ul id="dropdownMenu" class="absolute hidden text-gray-700 pt-1">
-            <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="<?= URL ?>page2">Page2</a></li>
-            <li><a class="rounded-b bg-gray-200 hover: bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="<?= URL ?>page3">Page3</a></li>
-          </ul>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="<?= URL ?>page2">Page2</a>
+            <a class="dropdown-item" href="<?= URL ?>page3">Page3</a>
+          </div>
         </li>
       </ul>
     </div>
