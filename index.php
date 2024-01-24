@@ -5,7 +5,7 @@ require_once("./Controller/MainController.php");
 $mainController = new MainController();
 try {
     if (empty($_GET['page'])) {
-        $page = "login";
+        header("Location: ".URL."login");
     } else {
         $url = explode ("/", filter_var($_GET['page'], FILTER_SANITIZE_URL));
         $page = $url[0];
