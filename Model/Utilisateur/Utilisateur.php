@@ -10,6 +10,8 @@ class Utilisateur implements UserInterface
 
     private string $nom_utilisateur;
 
+    private $data =[];
+
     public function getId(): int
     {
         return $this->id;
@@ -50,26 +52,21 @@ class Utilisateur implements UserInterface
         $this->nom_utilisateur = $nom_utilisateur;
     }
 
-    public function offsetExists(mixed $offset): bool
-    {
-        // TODO: Implement offsetExists() method.
+    public function offsetExists($offset):bool {
+        return isset($this->data[$offset]);
     }
 
-    public function offsetGet(mixed $offset): mixed
-    {
-        // TODO: Implement offsetGet() method.
+    public function offsetGet($offset) {
+        return $this->data[$offset] ?? null;
     }
 
-    public function offsetSet(mixed $offset, mixed $value): void
-    {
-        // TODO: Implement offsetSet() method.
+    public function offsetSet($offset, $value):void{
+        $this->data[$offset] = $value;
     }
 
-    public function offsetUnset(mixed $offset): void
-    {
-        // TODO: Implement offsetUnset() method.
+    public function offsetUnset($offset):void {
+        unset($this->data[$offset]);
     }
-
     public function seConnecter(string $email, string $password): void
     {
         // TODO: Implement seConnecter() method.
