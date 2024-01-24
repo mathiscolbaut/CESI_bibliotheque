@@ -1,5 +1,6 @@
 <?php
-class PhysiqueLivre {
+class PhysiqueLivre extends Livre
+{
     private float $poids;
     private string $isbn;
 

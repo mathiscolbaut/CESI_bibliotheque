@@ -1,5 +1,5 @@
 <?php
-class NumLivre{
+class NumLivre extends Livre {
     private float $taille;
     private bool $pisteAudio;
 

@@ -1,5 +1,6 @@
 <?php
-class Livre implements LivreInterface{
+require_once 'Services\Model.php';
+class Livre extends Model implements LivreInterface{
     private int $id;
     private string $titre;
     private string $auteur;
@@ -66,17 +67,58 @@ class Livre implements LivreInterface{
         unset($this->data[$offset]);
     }
 
-    public function addLivre(LivreInterface $livre){
+    public function addLivre(LivreInterface $livre):bool{
         if($livre instanceof NumLivre ){
-            $req = 'INSERT INTO livre'
+            $req = "INSERT INTO Livre (titre, auteur,image, description,taille,pisteAudio) VALUES (:titre,:auteur,:image,:description,:taille,:pisteAudio)";
+            $stmt = $this->getBdd()->prepare($req);
+            $stmt->bindValue(":titre", $this->titre,PDO::PARAM_STR);
+            $stmt->bindValue(":auteur", $this->auteur,PDO::PARAM_STR);
+            $stmt->bindValue(":image", $this->image,PDO::PARAM_STR);
+            $stmt->bindValue(":description", $this->description,PDO::PARAM_STR);
+            $stmt->bindValue(":taille",$this->getTaille(),PDO::PARAM_STR);
+            $stmt->bindValue(":pisteAudio",$this->getPisteAudio(),PDO::PARAM_BOOL);
+            if($stmt->execute()){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        if($livre instanceof PhysiqueLivre){
+            $req = "INSERT INTO Livre (titre, auteur,image, description,ISBN,poids) VALUES (:titre,:auteur,:image,:description, :ISBN,:poids)";
+            $stmt = $this->getBdd()->prepare($req);
+            $stmt->bindValue(":titre", $this->titre,PDO::PARAM_STR);
+            $stmt->bindValue(":auteur", $this->auteur,PDO::PARAM_STR);
+            $stmt->bindValue(":image", $this->image,PDO::PARAM_STR);
+            $stmt->bindValue(":description", $this->description,PDO::PARAM_STR);
+            $stmt->bindValue(":ISBN",$this->getIsbn(),PDO::PARAM_STR);
+            $stmt->bindValue(":poids", $this->getPoids(),PDO::PARAM_STR);
+            if($stmt->execute()){
+                return true;
+            }
+            else{
+                return false;
+            }
         }
         else{
-
+            return false;
         }
     }
 
-    public function delLivre(Livre $livre){
-
+    public function delLivre($id):bool{
+        $req = "SELECT titre FROM Livre WHERE id = :id";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        if($stmt->rowCount() == 1){
+            $req = "DELETE FROM Livre WHERE id= :id";
+            $stmt = $this->getBdd()->prepare($req);
+            $stmt->bindValue(":id",$id, PDO::PARAM_INT);
+            $stmt->execute();
+            return true;
+        }else {
+            return false;
+        }
     }
 
     public function updateLivre(int $id,Livre $livre){

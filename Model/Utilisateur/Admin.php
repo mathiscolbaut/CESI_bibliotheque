@@ -1,5 +1,5 @@
 <?php
 
-class Admin implements Utilisateur {
+class Admin extends Utilisateur {
 
 }

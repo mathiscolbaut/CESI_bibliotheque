@@ -1,4 +1,4 @@
 <?php 
-class Bibliothecaires implements Utilisateur{
+class Bibliothecaires extends Utilisateur{
 
 }

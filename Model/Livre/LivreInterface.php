@@ -15,8 +15,8 @@ interface LivreInterface extends ArrayAccess{
     public function offsetGet($offset);
     public function offsetSet($offset, $value):void;
     public function offsetUnset($offset):void;
-    public function addLivre(Livre $livre);
-    public function delLivre(Livre $livre);
+    public function addLivre(LivreInterface $livre);
+    public function delLivre(int $id);
     public function updateLivre(int $id,Livre $livre);
 
 }
