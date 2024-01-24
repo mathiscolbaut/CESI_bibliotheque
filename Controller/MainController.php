@@ -50,6 +50,18 @@ require_once ("Model/livre/Livre.php");
         ];
         $this->render($data_page);
     }
+
+    public function livreDetails (int $id){
+        $dataLivreById = $this->livre->getLivreById($id);
+        $data_page =[
+            "page_description" => "Description du livre",
+            "page_title" => "Détail livre",
+            "livreById" => $dataLivreById,
+            "view" => "View/livre/detailLivre.view.php",
+            "template" => "View/Layout/base.php"
+        ];
+        $this->render($data_page);
+    }
     public function seConnecter()
     {
         $email = $_POST['mail'];
@@ -113,5 +125,6 @@ require_once ("Model/livre/Livre.php");
             header("Location: ".URL."register");
         }
     }
+
 }
 ?>

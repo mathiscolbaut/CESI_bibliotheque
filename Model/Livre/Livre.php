@@ -134,6 +134,18 @@ class Livre extends Model implements LivreInterface{
             return false;
         }
     }
+    public function getLivreById($id) {
+        $req = "SELECT * FROM Livre WHERE id = :id";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        if ($stmt->rowCount() == 1)
+            $livreGet = $stmt->fetch(PDO::FETCH_ASSOC);
+        else
+            $livreGet = "Rien";
+
+        return $livreGet;
+    }
 
     public function updateLivre(int $id,Livre $livre){
 

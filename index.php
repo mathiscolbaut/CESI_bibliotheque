@@ -41,6 +41,11 @@ try {
         case "livre" :
             $mainController->livre();
             break;
+        case "livreDetails" :
+            $id = isset($url[1]) ? $url[1] : null;
+            // Appelez la méthode en passant l'ID
+            $mainController->livreDetails($id);
+            break;
         default:
             throw new Exception ("La page n'existe pas");
     }
