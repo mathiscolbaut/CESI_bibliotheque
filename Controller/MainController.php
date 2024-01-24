@@ -3,7 +3,7 @@ require_once 'Services/ToolBox.php';
 require_once 'Services/Render/Render.php';
 require_once ("Model/MainManager/MainManager.php");
 require_once ("Model/Utilisateur/Utilisateur.php");
-class MainController extends Render {
+#[AllowDynamicProperties] class MainController extends Render {
 
     private $mainManager;
     
