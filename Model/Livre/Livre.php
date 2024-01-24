@@ -1,5 +1,6 @@
 <?php
 require_once 'Services\Model.php';
+require_once 'LivreInterface.php';
 class Livre extends Model implements LivreInterface{
     private int $id;
     private string $titre;
@@ -55,7 +56,8 @@ class Livre extends Model implements LivreInterface{
         return isset($this->data[$offset]);
     }
 
-    public function offsetGet($offset) {
+    public function offsetGet($offset): mixed
+    {
         return $this->data[$offset] ?? null;
     }
 
@@ -67,6 +69,18 @@ class Livre extends Model implements LivreInterface{
         unset($this->data[$offset]);
     }
 
+    public function getAllLivre(){
+            $req = "SELECT * FROM Livre";
+            $stmt = $this->getBdd()->prepare($req);
+            $stmt->execute();
+
+            if ($stmt->rowCount() >= 1)
+                $listAllLivre = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            else
+                $listAllLivre = "Rien";
+
+            return $listAllLivre;
+    }
     public function addLivre(LivreInterface $livre):bool{
         if($livre instanceof NumLivre ){
             $req = "INSERT INTO Livre (titre, auteur,image, description,taille,pisteAudio) VALUES (:titre,:auteur,:image,:description,:taille,:pisteAudio)";

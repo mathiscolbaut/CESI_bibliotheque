@@ -3,6 +3,7 @@ require_once 'Services/ToolBox.php';
 require_once 'Services/Render/Render.php';
 require_once ("Model/MainManager/MainManager.php");
 require_once ("Model/Utilisateur/Utilisateur.php");
+require_once ("Model/livre/Livre.php");
 #[AllowDynamicProperties] class MainController extends Render {
 
     private $mainManager;
@@ -12,6 +13,7 @@ require_once ("Model/Utilisateur/Utilisateur.php");
         parent::__construct(Render::class);
         $this->mainManager = new MainManager();
         $this->utilisateur = new Utilisateur();
+        $this->livre = new Livre();
     }
     public function accueil(){
         $data_page =[
@@ -36,6 +38,18 @@ require_once ("Model/Utilisateur/Utilisateur.php");
         $this->render($data_page);
     }
 
+    public function livre(): void {
+        $datas = $this->livre->getAllLivre();
+        $data_page =[
+            "page_description" => "Livre",
+            "page_title" => "Livre",
+            "datas" => $datas,
+            "page_css" => ["page1.css"],
+            "view" => "View/livre/livre.view.php",
+            "template" => "View/Layout/base.php"
+        ];
+        $this->render($data_page);
+    }
     public function seConnecter()
     {
         $email = $_POST['mail'];

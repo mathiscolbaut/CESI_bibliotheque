@@ -12,7 +12,7 @@ interface LivreInterface extends ArrayAccess{
     public function getDescription():string;
     public function setDescription(string $description):void;
     public function offsetExists($offset):bool;
-    public function offsetGet($offset);
+    public function offsetGet($offset): mixed;
     public function offsetSet($offset, $value):void;
     public function offsetUnset($offset):void;
     public function addLivre(LivreInterface $livre);

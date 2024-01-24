@@ -38,6 +38,9 @@ try {
         case "page3" :
             $mainController->page3();
             break;
+        case "livre" :
+            $mainController->livre();
+            break;
         default:
             throw new Exception ("La page n'existe pas");
     }
