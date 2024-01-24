@@ -1,8 +1,6 @@
 <?php
 
-namespace Utilisateur;
-
-interface UserInterface
+interface UserInterface extends ArrayAccess
 {
 
 }
