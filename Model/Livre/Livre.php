@@ -66,8 +66,13 @@ class Livre implements LivreInterface{
         unset($this->data[$offset]);
     }
 
-    public function addLivre(Livre $livre){
+    public function addLivre(LivreInterface $livre){
+        if($livre instanceof NumLivre ){
+            $req = 'INSERT INTO livre'
+        }
+        else{
 
+        }
     }
 
     public function delLivre(Livre $livre){
@@ -75,6 +80,7 @@ class Livre implements LivreInterface{
     }
 
     public function updateLivre(int $id,Livre $livre){
+
 
     }
 }
