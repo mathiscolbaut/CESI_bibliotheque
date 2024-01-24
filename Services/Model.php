@@ -13,4 +13,13 @@ abstract class Model{
         }
         return self::$pdo;
     }
+
+    private function __clone() {
+        // Bloquer la méthode __clone
+        throw new Exception("Clonage interdit");
+    }
+    private function __wakeup() {
+        // Bloquer la méthode __wakeup
+        throw  new Exception("Wakeup interdit");
+    }
 }
