@@ -31,7 +31,7 @@
 <main class="container mx-auto px-6 py-10">
     <!-- Contenu principal de la page -->
     <?php $url = $_SERVER['REQUEST_URI'];
-    if ($url == "/CESI_bibliotheque/login" || $url == "/CESI_bibliotheque/register") {
+    if ($url == "/CESI_bibliotheque/login" || $url == "/CESI_bibliotheque/register" || "/CESI_bibliotheque/") {
 
     }else{
         require_once('View/Layout/header.php');

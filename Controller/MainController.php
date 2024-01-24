@@ -94,9 +94,9 @@ require_once ("Model/Utilisateur/Utilisateur.php");
         $isRegister = $this->utilisateur->inscrire($email, $password, $nomUtilisateur);
 
         if($isRegister){
-            $this->login();
+            header("Location: ".URL."login");
         } else{
-            $this->register();
+            header("Location: ".URL."register");
         }
     }
 }
